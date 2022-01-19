@@ -1,0 +1,20 @@
+var client = new RestClient("https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup?=");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Authorization", "Bearer <token>");
+var body = @"{" + "\n" +
+@"    ""resourceType"": ""Parameters""," + "\n" +
+@"    ""parameter"": [" + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""system""," + "\n" +
+@"            ""valueUri"": ""http://snomed.info/sct""" + "\n" +
+@"        }," + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""code""," + "\n" +
+@"            ""valueString"": ""397956004 |Prosthetic arthroplasty of the hip|: 363704007 |Procedure site| = ( 24136001 |Hip joint structure|: 272741003 |Laterality| =  7771000 |Left| )""" + "\n" +
+@"        }" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddParameter("text/plain", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);

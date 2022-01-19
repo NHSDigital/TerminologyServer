@@ -1,0 +1,7 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$body = "{`n    `"resourceType`": `"Parameters`",`n    `"parameter`": [`n        {`n            `"name`": `"url`",`n            `"valueUri`": `"http://hl7.org/fhir/ValueSet/feeding-device`"`n        },`n        {`n            `"name`": `"codeableConcept`",`n            `"valueCodeableConcept`": {`n                `"coding`": [`n                    {`n                        `"code`": `"sippy-valve`",`n                        `"system`": `"http://hl7.org/fhir/feeding-device`",`n                        `"display`": `"Sippy cup with valve`"`n                    }`n                ]`n            }`n        }`n    ]`n}"
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code' -Method 'POST' -Headers $headers -Body $body
+$response | ConvertTo-Json

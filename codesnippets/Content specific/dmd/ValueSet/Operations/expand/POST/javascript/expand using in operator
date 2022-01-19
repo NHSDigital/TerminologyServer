@@ -1,0 +1,16 @@
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer <token>");
+
+var raw = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"valueSet\",\r\n            \"resource\": {\r\n                \"resourceType\": \"ValueSet\",\r\n                \"compose\": {\r\n                    \"include\": [\r\n                        {\r\n                            \"system\": \"https://dmd.nhs.uk\",\r\n                            \"filter\": [\r\n                                {\r\n                                    \"property\": \"parent\",\r\n                                    \"op\": \"=\",\r\n                                    \"value\": \"VMP\"\r\n                                },\r\n                                {\r\n                                    \"property\": \"parent\",\r\n                                    \"op\": \"in\",\r\n                                    \"value\": \"73572009,90332006,412556009\"\r\n                                },\r\n                                {\r\n                                    \"property\": \"ROUTECD\",\r\n                                    \"op\": \"=\",\r\n                                    \"value\": \"73572009,90332006,412556009\"\r\n                                }\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"name\": \"count\",\r\n            \"valueInteger\": 100\r\n        }\r\n    ]\r\n}";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://ontology.nhs.uk/production1/fhir/ValueSet/$expand", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

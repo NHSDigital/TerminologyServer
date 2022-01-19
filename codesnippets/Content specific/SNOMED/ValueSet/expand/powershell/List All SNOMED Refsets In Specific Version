@@ -1,0 +1,5 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$response = Invoke-RestMethod '{{fhir-prod}}/ValueSet/$expand?url=http://snomed.info/sct/83821000000107/version/20210804?fhir_vs=refset' -Method 'GET' -Headers $headers
+$response | ConvertTo-Json

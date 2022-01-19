@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand?url=https://dmd.nhs.uk/ValueSet/VMP&system-version=https://dmd.nhs.uk%7C202111.0.0&count=10' \
+--header 'Authorization: Bearer <token>'

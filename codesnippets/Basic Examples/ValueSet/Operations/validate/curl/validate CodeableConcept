@@ -1,0 +1,23 @@
+curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "url",
+            "valueUri": "http://hl7.org/fhir/ValueSet/feeding-device"
+        },
+        {
+            "name": "codeableConcept",
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "code": "sippy-valve",
+                        "system": "http://hl7.org/fhir/feeding-device",
+                        "display": "Sippy cup with valve"
+                    }
+                ]
+            }
+        }
+    ]
+}'

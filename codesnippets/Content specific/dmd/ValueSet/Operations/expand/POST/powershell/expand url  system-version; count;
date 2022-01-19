@@ -1,0 +1,7 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$body = "{`n    `"resourceType`": `"Parameters`",`n    `"parameter`": [`n        {`n            `"name`": `"url`",`n            `"valueUri`": `"https://dmd.nhs.uk/vs`"`n        },`n        {`n            `"name`": `"system-version`",`n            `"valueCanonical`": `"https://dmd.nhs.uk|202111.0.0`"`n        },`n        {`n            `"name`": `"count`",`n            `"valueInteger`": 10`n        }`n    ]`n}"
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand' -Method 'POST' -Headers $headers -Body $body
+$response | ConvertTo-Json

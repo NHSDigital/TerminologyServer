@@ -1,0 +1,5 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand?url=https://dmd.nhs.uk/ValueSet/VTM&count=10' -Method 'GET' -Headers $headers
+$response | ConvertTo-Json

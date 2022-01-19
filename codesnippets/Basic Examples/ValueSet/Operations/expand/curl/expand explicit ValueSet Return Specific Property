@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/ValueSet/feeding-device/$expand?property=effectiveTime' \
+--header 'Authorization: Bearer <token>'

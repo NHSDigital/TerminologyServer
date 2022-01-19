@@ -1,0 +1,24 @@
+var client = new RestClient("https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Content-Type", "application/fhir+json");
+request.AddHeader("Authorization", "Bearer <token>");
+var body = @"{" + "\n" +
+@"    ""resourceType"": ""Parameters""," + "\n" +
+@"    ""parameter"": [" + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""url""," + "\n" +
+@"            ""valueUri"": ""http://snomed.info/sct?fhir_vs=refset/32570361000036108""" + "\n" +
+@"        }," + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""coding""," + "\n" +
+@"            ""valueCoding"": {" + "\n" +
+@"                ""code"": ""241649002""," + "\n" +
+@"                ""system"": ""http://snomed.info/sct""" + "\n" +
+@"            }" + "\n" +
+@"        }" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddParameter("application/fhir+json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);

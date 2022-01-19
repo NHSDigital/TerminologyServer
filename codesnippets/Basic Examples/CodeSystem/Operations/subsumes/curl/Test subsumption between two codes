@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$subsumes?system=http://snomed.info/sct&codeA=107963000&codeB=63816008' \
+--header 'Authorization: Bearer <token>'

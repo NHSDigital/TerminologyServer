@@ -1,0 +1,37 @@
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = json.dumps({
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "valueSet",
+      "resource": {
+        "resourceType": "ValueSet",
+        "compose": {
+          "include": [
+            {
+              "system": "http://snomed.info/sct",
+              "filter": [
+                {
+                  "property": "constraint",
+                  "op": "=",
+                  "value": "<< 50043002 : << 263502005 = << 19939008"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+})
+headers = {
+  'Content-Type': 'application/fhir+json',
+  'Authorization': 'Bearer <token>'
+}
+conn.request("POST", "/production1/fhir/ValueSet/$expand", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

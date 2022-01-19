@@ -1,0 +1,14 @@
+require "uri"
+require "net/http"
+
+url = URI("https://ontology.nhs.uk/production1/fhir/ValueSet/$expand")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request.body = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"valueSet\",\r\n            \"resource\": {\r\n                \"resourceType\": \"ValueSet\",\r\n                \"compose\": {\r\n                    \"include\": [\r\n                        {\r\n                            \"system\": \"https://dmd.nhs.uk\",\r\n                            \"filter\": [\r\n                                {\r\n                                    \"property\": \"NMPREV\",\r\n                                    \"op\": \"regex\",\r\n                                    \"value\": \"./[pP]aracetamol./\"\r\n                                }\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"name\": \"count\",\r\n            \"valueInteger\": 100\r\n        }\r\n    ]\r\n}"
+
+response = https.request(request)
+puts response.read_body

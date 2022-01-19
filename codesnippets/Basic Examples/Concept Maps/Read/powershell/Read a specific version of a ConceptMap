@@ -1,0 +1,5 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/ConceptMap/NICIP-SNOMED-MAP-20171001/_history/1?_format=application/fhir+xml' -Method 'GET' -Headers $headers
+$response | ConvertTo-Json

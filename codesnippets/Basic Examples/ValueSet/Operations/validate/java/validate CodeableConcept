@@ -1,0 +1,10 @@
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"http://hl7.org/fhir/ValueSet/feeding-device\"\r\n        },\r\n        {\r\n            \"name\": \"codeableConcept\",\r\n            \"valueCodeableConcept\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"code\": \"sippy-valve\",\r\n                        \"system\": \"http://hl7.org/fhir/feeding-device\",\r\n                        \"display\": \"Sippy cup with valve\"\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ]\r\n}");
+Request request = new Request.Builder()
+  .url("https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code")
+  .method("POST", body)
+  .addHeader("Authorization", "Bearer <token>")
+  .build();
+Response response = client.newCall(request).execute();

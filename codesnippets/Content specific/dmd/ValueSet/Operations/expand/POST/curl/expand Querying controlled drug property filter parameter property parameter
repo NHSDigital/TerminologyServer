@@ -1,0 +1,56 @@
+curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "valueSet",
+            "resource": {
+                "resourceType": "ValueSet",
+                "compose": {
+                    "include": [
+                        {
+                            "system": "https://dmd.nhs.uk",
+                            "filter": [
+                                {
+                                    "property": "CATCD",
+                                    "op": "=",
+                                    "value": "2"
+                                },
+                                {
+                                    "property": "parent",
+                                    "op": "=",
+                                    "value": "VMP"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "count",
+            "valueInteger": 100
+        },
+        {
+            "name": "filter",
+            "valueString": "morphine"
+        },
+        {
+            "name": "property",
+            "valueString": "CATCD"
+        },
+        {
+            "name": "property",
+            "valueString": "parent"
+        },
+        {
+            "name": "property",
+            "valueString": "ROUTECD"
+        },
+        {
+            "name": "property",
+            "valueString": "FORMCD"
+        }
+    ]
+}'

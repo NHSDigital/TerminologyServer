@@ -1,0 +1,39 @@
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "url",
+            "valueUri": "http://snomed.info/sct"
+        },
+        {
+            "name": "coding",
+            "valueCoding": {
+                "system": "http://snomed.info/sct",
+                "code": "125605004 |fracture of bone| : 363698007 |finding site|  =  71341001 |bone structure of femur|"
+            }
+        }
+    ]
+}',
+  CURLOPT_HTTPHEADER => array(
+    'Content-Type: application/fhir+json',
+    'Authorization: Bearer <token>'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;

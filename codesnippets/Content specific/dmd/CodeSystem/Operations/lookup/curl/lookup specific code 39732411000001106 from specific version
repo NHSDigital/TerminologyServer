@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup?system=https://dmd.nhs.uk&version=202111.1.0&code=39732411000001106' \
+--header 'Authorization: Bearer <token>'

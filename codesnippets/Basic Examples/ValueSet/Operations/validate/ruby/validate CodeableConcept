@@ -1,0 +1,14 @@
+require "uri"
+require "net/http"
+
+url = URI("https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request.body = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"http://hl7.org/fhir/ValueSet/feeding-device\"\r\n        },\r\n        {\r\n            \"name\": \"codeableConcept\",\r\n            \"valueCodeableConcept\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"code\": \"sippy-valve\",\r\n                        \"system\": \"http://hl7.org/fhir/feeding-device\",\r\n                        \"display\": \"Sippy cup with valve\"\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ]\r\n}"
+
+response = https.request(request)
+puts response.read_body

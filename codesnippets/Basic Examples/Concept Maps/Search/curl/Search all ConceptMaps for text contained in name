@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/ConceptMap?name:contains=nhs&_count=10' \
+--header 'Authorization: Bearer <token>'

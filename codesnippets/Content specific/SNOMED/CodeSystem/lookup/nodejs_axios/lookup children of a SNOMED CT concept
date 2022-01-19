@@ -1,0 +1,17 @@
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup?system=http://snomed.info/sct&code=56265001&_format=json&property=child',
+  headers: { 
+    'Authorization': 'Bearer <token>'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});

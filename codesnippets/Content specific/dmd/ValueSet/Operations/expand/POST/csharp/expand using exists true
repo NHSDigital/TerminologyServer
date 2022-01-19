@@ -1,0 +1,54 @@
+var client = new RestClient("https://ontology.nhs.uk/production1/fhir/ValueSet/$expand");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Authorization", "Bearer <token>");
+var body = @"{" + "\n" +
+@"    ""resourceType"": ""Parameters""," + "\n" +
+@"    ""parameter"": [" + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""valueSet""," + "\n" +
+@"            ""resource"": {" + "\n" +
+@"                ""resourceType"": ""ValueSet""," + "\n" +
+@"                ""compose"": {" + "\n" +
+@"                    ""include"": [" + "\n" +
+@"                        {" + "\n" +
+@"                            ""system"": ""https://dmd.nhs.uk""," + "\n" +
+@"                            ""filter"": [" + "\n" +
+@"                                {" + "\n" +
+@"                                    ""property"": ""CATCD""," + "\n" +
+@"                                    ""op"": ""=""," + "\n" +
+@"                                    ""value"": ""2""" + "\n" +
+@"                                }," + "\n" +
+@"                                {" + "\n" +
+@"                                    ""property"": ""parent""," + "\n" +
+@"                                    ""op"": ""=""," + "\n" +
+@"                                    ""value"": ""VMP""" + "\n" +
+@"                                }," + "\n" +
+@"                                {" + "\n" +
+@"                                    ""property"": ""INVALID""," + "\n" +
+@"                                    ""op"": ""exists""," + "\n" +
+@"                                    ""value"": true" + "\n" +
+@"                                }" + "\n" +
+@"                            ]" + "\n" +
+@"                        }" + "\n" +
+@"                    ]" + "\n" +
+@"                }" + "\n" +
+@"            }" + "\n" +
+@"        }," + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""count""," + "\n" +
+@"            ""valueInteger"": 100" + "\n" +
+@"        }," + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""filter""," + "\n" +
+@"            ""valueString"": ""morphine""" + "\n" +
+@"        }," + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""property""," + "\n" +
+@"            ""valueString"": ""INVALID""" + "\n" +
+@"        }" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddParameter("text/plain", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);

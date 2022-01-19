@@ -1,0 +1,2 @@
+curl --location -g --request GET '{{fhir-prod}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=refset/999002811000000107' \
+--header 'Authorization: Bearer <token>'

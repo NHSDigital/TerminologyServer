@@ -1,0 +1,8 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Content-Type", "application/fhir+json")
+$headers.Add("Authorization", "Bearer <token>")
+
+$body = "{`n    `"resourceType`": `"Parameters`",`n    `"parameter`": [`n        {`n            `"name`": `"url`",`n            `"valueUri`": `"http://snomed.info/sct?fhir_vs=refset/32570361000036108`"`n        },`n        {`n            `"name`": `"coding`",`n            `"valueCoding`": {`n                `"code`": `"241649002`",`n                `"system`": `"http://snomed.info/sct`"`n            }`n        }`n    ]`n}"
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code' -Method 'POST' -Headers $headers -Body $body
+$response | ConvertTo-Json

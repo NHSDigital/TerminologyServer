@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"valueSet\",\r\n            \"resource\": {\r\n                \"resourceType\": \"ValueSet\",\r\n                \"compose\": {\r\n                    \"include\": [\r\n                        {\r\n                            \"system\": \"https://dmd.nhs.uk\",\r\n                            \"filter\": [\r\n                                {\r\n                                    \"property\": \"CATCD\",\r\n                                    \"op\": \"=\",\r\n                                    \"value\": \"2\"\r\n                                },\r\n                                {\r\n                                    \"property\": \"parent\",\r\n                                    \"op\": \"=\",\r\n                                    \"value\": \"VMP\"\r\n                                }\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"name\": \"count\",\r\n            \"valueInteger\": 100\r\n        },\r\n        {\r\n            \"name\": \"filter\",\r\n            \"valueString\": \"morphine\"\r\n        },\r\n        {\r\n            \"name\": \"property\",\r\n            \"valueString\": \"CATCD\"\r\n        },\r\n        {\r\n            \"name\": \"property\",\r\n            \"valueString\": \"parent\"\r\n        },\r\n        {\r\n            \"name\": \"property\",\r\n            \"valueString\": \"ROUTECD\"\r\n        },\r\n        {\r\n            \"name\": \"property\",\r\n            \"valueString\": \"FORMCD\"\r\n        }\r\n    ]\r\n}"
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("POST", "/production1/fhir/ValueSet/$expand", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

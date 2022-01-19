@@ -1,0 +1,23 @@
+var client = new RestClient("https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Authorization", "Bearer <token>");
+var body = @"{" + "\n" +
+@"  ""resourceType"": ""Parameters""," + "\n" +
+@"  ""parameter"": [" + "\n" +
+@"    {" + "\n" +
+@"      ""name"": ""coding""," + "\n" +
+@"      ""valueCoding"": {" + "\n" +
+@"        ""system"": ""http://snomed.info/sct""," + "\n" +
+@"        ""code"": ""56265001""" + "\n" +
+@"      }" + "\n" +
+@"    }," + "\n" +
+@"    {" + "\n" +
+@"      ""name"": ""property""," + "\n" +
+@"      ""valueString"": ""inactive""" + "\n" +
+@"    }" + "\n" +
+@"  ]" + "\n" +
+@"}";
+request.AddParameter("text/plain", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);

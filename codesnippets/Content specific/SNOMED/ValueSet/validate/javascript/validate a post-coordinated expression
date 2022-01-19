@@ -1,0 +1,32 @@
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/fhir+json");
+myHeaders.append("Authorization", "Bearer <token>");
+
+var raw = JSON.stringify({
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "url",
+      "valueUri": "http://snomed.info/sct"
+    },
+    {
+      "name": "coding",
+      "valueCoding": {
+        "system": "http://snomed.info/sct",
+        "code": "125605004 |fracture of bone| : 363698007 |finding site|  =  71341001 |bone structure of femur|"
+      }
+    }
+  ]
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

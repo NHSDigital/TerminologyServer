@@ -1,0 +1,15 @@
+var urlencoded = new URLSearchParams();
+urlencoded.append("grant_type", "client_credentials");
+urlencoded.append("client_id", "{{client_id}}");
+urlencoded.append("client_secret", "{{client_secret}}");
+
+var requestOptions = {
+  method: 'POST',
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("https://ontology.nhs.uk/authorisation/auth/realms/nhs-digital-terminology/protocol/openid-connect/token", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

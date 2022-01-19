@@ -1,0 +1,33 @@
+var client = new RestClient("https://ontology.nhs.uk/production1/fhir/ValueSet/$expand");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Content-Type", "application/fhir+json");
+request.AddHeader("Authorization", "Bearer <token>");
+var body = @"{" + "\n" +
+@"    ""resourceType"": ""Parameters""," + "\n" +
+@"    ""parameter"": [" + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""valueSet""," + "\n" +
+@"            ""resource"": {" + "\n" +
+@"                ""resourceType"": ""ValueSet""," + "\n" +
+@"                ""compose"": {" + "\n" +
+@"                    ""include"": [" + "\n" +
+@"                        {" + "\n" +
+@"                            ""system"": ""http://snomed.info/sct""," + "\n" +
+@"                            ""filter"": [" + "\n" +
+@"                                {" + "\n" +
+@"                                    ""property"": ""constraint""," + "\n" +
+@"                                    ""op"": ""=""," + "\n" +
+@"                                    ""value"": ""<< 50043002 : << 263502005 = << 19939008""" + "\n" +
+@"                                }" + "\n" +
+@"                            ]" + "\n" +
+@"                        }" + "\n" +
+@"                    ]" + "\n" +
+@"                }" + "\n" +
+@"            }" + "\n" +
+@"        }" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddParameter("application/fhir+json", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);

@@ -1,0 +1,16 @@
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer <token>");
+
+var raw = "{\r\n  \"resourceType\": \"Parameters\",\r\n  \"parameter\": [\r\n    {\r\n      \"name\": \"coding\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"56265001\"\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"property\",\r\n      \"valueString\": \"inactive\"\r\n    }\r\n  ]\r\n}";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

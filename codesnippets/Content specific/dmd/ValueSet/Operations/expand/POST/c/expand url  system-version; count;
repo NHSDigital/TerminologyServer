@@ -1,0 +1,16 @@
+CURL *curl;
+CURLcode res;
+curl = curl_easy_init();
+if(curl) {
+  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+  curl_easy_setopt(curl, CURLOPT_URL, "https://ontology.nhs.uk/production1/fhir/ValueSet/$expand");
+  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+  curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+  struct curl_slist *headers = NULL;
+  headers = curl_slist_append(headers, "Authorization: Bearer <token>");
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+  const char *data = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"https://dmd.nhs.uk/vs\"\r\n        },\r\n        {\r\n            \"name\": \"system-version\",\r\n            \"valueCanonical\": \"https://dmd.nhs.uk|202111.0.0\"\r\n        },\r\n        {\r\n            \"name\": \"count\",\r\n            \"valueInteger\": 10\r\n        }\r\n    ]\r\n}";
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+  res = curl_easy_perform(curl);
+}
+curl_easy_cleanup(curl);

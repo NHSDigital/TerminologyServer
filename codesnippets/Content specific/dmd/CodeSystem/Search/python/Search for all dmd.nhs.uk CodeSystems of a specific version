@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = ''
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("GET", "/production1/fhir/CodeSystem?url:below=https://dmd.nhs.uk&version=202112.0.0&_count=10&_elements=name,url,version,valueSet", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

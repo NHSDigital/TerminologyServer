@@ -1,0 +1,19 @@
+curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "url",
+            "valueUri": "https://dmd.nhs.uk/vs"
+        },
+        {
+            "name": "system-version",
+            "valueCanonical": "https://dmd.nhs.uk|202111.0.0"
+        },
+        {
+            "name": "count",
+            "valueInteger": 10
+        }
+    ]
+}'

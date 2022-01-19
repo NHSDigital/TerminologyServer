@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/ConceptMap/102/$translate?code=309068002&system=http://snomed.info/sct&reverse=true&target=http://hl7.org/fhir/v2/0487' \
+--header 'Authorization: Bearer <token>'
