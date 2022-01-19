@@ -1,0 +1,44 @@
+var axios = require('axios');
+var data = JSON.stringify({
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "valueSet",
+      "resource": {
+        "resourceType": "ValueSet",
+        "compose": {
+          "include": [
+            {
+              "system": "http://snomed.info/sct",
+              "filter": [
+                {
+                  "property": "constraint",
+                  "op": "=",
+                  "value": "<< 50043002 : << 263502005 = << 19939008"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+});
+
+var config = {
+  method: 'post',
+  url: 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand',
+  headers: { 
+    'Content-Type': 'application/fhir+json', 
+    'Authorization': 'Bearer <token>'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});

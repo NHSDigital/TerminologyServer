@@ -1,0 +1,28 @@
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = json.dumps({
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "url",
+      "valueUri": "http://snomed.info/sct"
+    },
+    {
+      "name": "coding",
+      "valueCoding": {
+        "system": "http://snomed.info/sct",
+        "code": "125605004 |fracture of bone| : 363698007 |finding site|  =  71341001 |bone structure of femur|"
+      }
+    }
+  ]
+})
+headers = {
+  'Content-Type': 'application/fhir+json',
+  'Authorization': 'Bearer <token>'
+}
+conn.request("POST", "/production1/fhir/ValueSet/$validate-code", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

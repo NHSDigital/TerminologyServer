@@ -1,0 +1,9 @@
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "grant_type=client_credentials&client_id={{client_id}}&client_secret={{client_secret}}");
+Request request = new Request.Builder()
+  .url("https://ontology.nhs.uk/authorisation/auth/realms/nhs-digital-terminology/protocol/openid-connect/token")
+  .method("POST", body)
+  .build();
+Response response = client.newCall(request).execute();

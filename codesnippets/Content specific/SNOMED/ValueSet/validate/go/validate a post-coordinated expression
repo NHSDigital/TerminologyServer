@@ -1,0 +1,56 @@
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code"
+  method := "POST"
+
+  payload := strings.NewReader(`{`+""+`
+    "resourceType": "Parameters",`+""+`
+    "parameter": [`+""+`
+        {`+""+`
+            "name": "url",`+""+`
+            "valueUri": "http://snomed.info/sct"`+""+`
+        },`+""+`
+        {`+""+`
+            "name": "coding",`+""+`
+            "valueCoding": {`+""+`
+                "system": "http://snomed.info/sct",`+""+`
+                "code": "125605004 |fracture of bone| : 363698007 |finding site|  =  71341001 |bone structure of femur|"`+""+`
+            }`+""+`
+        }`+""+`
+    ]`+""+`
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/fhir+json")
+  req.Header.Add("Authorization", "Bearer <token>")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := ioutil.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}

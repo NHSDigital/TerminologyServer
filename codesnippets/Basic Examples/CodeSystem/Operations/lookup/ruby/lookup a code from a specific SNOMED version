@@ -1,0 +1,13 @@
+require "uri"
+require "net/http"
+
+url = URI("https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup?system=http://snomed.info/sct&code=56265001&_format=json&version=http://snomed.info/sct/83821000000107/version/20211222")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+request["Authorization"] = "Bearer <token>"
+
+response = https.request(request)
+puts response.read_body

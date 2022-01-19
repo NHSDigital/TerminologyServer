@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = "{\r\n  \"resourceType\": \"Parameters\",\r\n  \"parameter\": [\r\n    {\r\n      \"name\": \"coding\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"56265001\"\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"property\",\r\n      \"valueString\": \"inactive\"\r\n    }\r\n  ]\r\n}"
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("POST", "/production1/fhir/CodeSystem/$lookup", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

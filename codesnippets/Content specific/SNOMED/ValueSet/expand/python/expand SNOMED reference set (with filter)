@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = ''
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("GET", "/production1/fhir/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=refset/723264001&count=10&filter=myot", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

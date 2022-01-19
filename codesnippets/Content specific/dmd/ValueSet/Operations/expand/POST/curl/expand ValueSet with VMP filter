@@ -1,0 +1,35 @@
+curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "valueSet",
+            "resource": {
+                "resourceType": "ValueSet",
+                "compose": {
+                    "include": [
+                        {
+                            "system": "https://dmd.nhs.uk",
+                            "filter": [
+                                {
+                                    "property": "parent",
+                                    "op": "=",
+                                    "value": "VMP"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "count",
+            "valueInteger": 100
+        },
+        {
+            "name": "filter",
+            "valueString": "co-amox 500"
+        }
+    ]
+}'

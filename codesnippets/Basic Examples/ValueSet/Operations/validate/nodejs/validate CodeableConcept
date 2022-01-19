@@ -1,0 +1,35 @@
+var https = require('follow-redirects').https;
+var fs = require('fs');
+
+var options = {
+  'method': 'POST',
+  'hostname': 'ontology.nhs.uk',
+  'path': '/production1/fhir/ValueSet/$validate-code',
+  'headers': {
+    'Authorization': 'Bearer <token>'
+  },
+  'maxRedirects': 20
+};
+
+var req = https.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function (chunk) {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+
+  res.on("error", function (error) {
+    console.error(error);
+  });
+});
+
+var postData =  "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"http://hl7.org/fhir/ValueSet/feeding-device\"\r\n        },\r\n        {\r\n            \"name\": \"codeableConcept\",\r\n            \"valueCodeableConcept\": {\r\n                \"coding\": [\r\n                    {\r\n                        \"code\": \"sippy-valve\",\r\n                        \"system\": \"http://hl7.org/fhir/feeding-device\",\r\n                        \"display\": \"Sippy cup with valve\"\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ]\r\n}";
+
+req.write(postData);
+
+req.end();

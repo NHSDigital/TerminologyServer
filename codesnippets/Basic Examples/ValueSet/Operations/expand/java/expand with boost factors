@@ -1,0 +1,8 @@
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("")
+  .method("GET", null)
+  .addHeader("Authorization", "Bearer <token>")
+  .build();
+Response response = client.newCall(request).execute();

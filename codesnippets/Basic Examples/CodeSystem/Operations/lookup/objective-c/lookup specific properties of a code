@@ -1,0 +1,31 @@
+#import <Foundation/Foundation.h>
+
+dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup?system=http://snomed.info/sct&code=56265001&_format=json&property=inactive&property=display"]
+  cachePolicy:NSURLRequestUseProtocolCachePolicy
+  timeoutInterval:10.0];
+NSDictionary *headers = @{
+  @"Authorization": @"Bearer <token>"
+};
+
+[request setAllHTTPHeaderFields:headers];
+
+[request setHTTPMethod:@"GET"];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+  if (error) {
+    NSLog(@"%@", error);
+    dispatch_semaphore_signal(sema);
+  } else {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    NSError *parseError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+    NSLog(@"%@",responseDictionary);
+    dispatch_semaphore_signal(sema);
+  }
+}];
+[dataTask resume];
+dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);

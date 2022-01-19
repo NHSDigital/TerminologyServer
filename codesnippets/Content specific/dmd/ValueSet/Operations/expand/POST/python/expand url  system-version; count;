@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"https://dmd.nhs.uk/vs\"\r\n        },\r\n        {\r\n            \"name\": \"system-version\",\r\n            \"valueCanonical\": \"https://dmd.nhs.uk|202111.0.0\"\r\n        },\r\n        {\r\n            \"name\": \"count\",\r\n            \"valueInteger\": 10\r\n        }\r\n    ]\r\n}"
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("POST", "/production1/fhir/ValueSet/$expand", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = ''
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("GET", "/production1/fhir/CodeSystem/$lookup?system=http://snomed.info/sct&code=56265001&_format=json&property=inactive&property=display", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

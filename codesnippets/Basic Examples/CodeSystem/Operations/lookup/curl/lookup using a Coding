@@ -1,0 +1,18 @@
+curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "coding",
+      "valueCoding": {
+        "system": "http://snomed.info/sct",
+        "code": "56265001"
+      }
+    },
+    {
+      "name": "property",
+      "valueString": "inactive"
+    }
+  ]
+}'

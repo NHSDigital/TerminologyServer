@@ -1,0 +1,14 @@
+require "uri"
+require "net/http"
+
+url = URI("https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Post.new(url)
+request["Authorization"] = "Bearer <token>"
+request.body = "{\r\n  \"resourceType\": \"Parameters\",\r\n  \"parameter\": [\r\n    {\r\n      \"name\": \"coding\",\r\n      \"valueCoding\": {\r\n        \"system\": \"http://snomed.info/sct\",\r\n        \"code\": \"56265001\"\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"property\",\r\n      \"valueString\": \"inactive\"\r\n    }\r\n  ]\r\n}"
+
+response = https.request(request)
+puts response.read_body

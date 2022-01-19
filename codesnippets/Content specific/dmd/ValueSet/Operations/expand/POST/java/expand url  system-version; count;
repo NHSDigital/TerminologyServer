@@ -1,0 +1,10 @@
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"https://dmd.nhs.uk/vs\"\r\n        },\r\n        {\r\n            \"name\": \"system-version\",\r\n            \"valueCanonical\": \"https://dmd.nhs.uk|202111.0.0\"\r\n        },\r\n        {\r\n            \"name\": \"count\",\r\n            \"valueInteger\": 10\r\n        }\r\n    ]\r\n}");
+Request request = new Request.Builder()
+  .url("https://ontology.nhs.uk/production1/fhir/ValueSet/$expand")
+  .method("POST", body)
+  .addHeader("Authorization", "Bearer <token>")
+  .build();
+Response response = client.newCall(request).execute();

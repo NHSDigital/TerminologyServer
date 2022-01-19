@@ -1,0 +1,41 @@
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/fhir+json");
+myHeaders.append("Authorization", "Bearer <token>");
+
+var raw = JSON.stringify({
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "valueSet",
+      "resource": {
+        "resourceType": "ValueSet",
+        "compose": {
+          "include": [
+            {
+              "system": "http://snomed.info/sct",
+              "filter": [
+                {
+                  "property": "constraint",
+                  "op": "=",
+                  "value": "<< 50043002 : << 263502005 = << 19939008"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://ontology.nhs.uk/production1/fhir/ValueSet/$expand", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

@@ -1,0 +1,16 @@
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer <token>");
+
+var raw = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"system\",\r\n            \"valueUri\": \"http://snomed.info/sct\"\r\n        },\r\n        {\r\n            \"name\": \"code\",\r\n            \"valueString\": \"397956004 |Prosthetic arthroplasty of the hip|: 363704007 |Procedure site| = ( 24136001 |Hip joint structure|: 272741003 |Laterality| =  7771000 |Left| )\"\r\n        }\r\n    ]\r\n}";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup?=", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

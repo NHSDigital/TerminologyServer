@@ -1,0 +1,11 @@
+require "uri"
+require "net/http"
+
+url = URI("")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Get.new(url)
+request["Authorization"] = "Bearer <token>"
+
+response = http.request(request)
+puts response.read_body

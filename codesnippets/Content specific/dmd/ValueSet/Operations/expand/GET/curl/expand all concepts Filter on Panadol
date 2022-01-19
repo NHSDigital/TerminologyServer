@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand?url=https://dmd.nhs.uk/vs&count=10&filter=Panadol' \
+--header 'Authorization: Bearer <token>'

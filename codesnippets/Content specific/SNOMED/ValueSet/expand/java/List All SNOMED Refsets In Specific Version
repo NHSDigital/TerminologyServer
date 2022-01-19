@@ -1,0 +1,8 @@
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("{{fhir-prod}}/ValueSet/$expand?url=http://snomed.info/sct/83821000000107/version/20210804?fhir_vs=refset")
+  .method("GET", null)
+  .addHeader("Authorization", "Bearer <token>")
+  .build();
+Response response = client.newCall(request).execute();

@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = ''
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("GET", "/production1/fhir/CodeSystem/$lookup?system=https://dmd.nhs.uk&code=17369211000001102&property=FORMCD&property=ROUTECD", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

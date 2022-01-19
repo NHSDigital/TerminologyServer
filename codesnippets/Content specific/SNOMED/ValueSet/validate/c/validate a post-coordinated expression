@@ -1,0 +1,17 @@
+CURL *curl;
+CURLcode res;
+curl = curl_easy_init();
+if(curl) {
+  curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+  curl_easy_setopt(curl, CURLOPT_URL, "https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code");
+  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+  curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+  struct curl_slist *headers = NULL;
+  headers = curl_slist_append(headers, "Content-Type: application/fhir+json");
+  headers = curl_slist_append(headers, "Authorization: Bearer <token>");
+  curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+  const char *data = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"http://snomed.info/sct\"\r\n        },\r\n        {\r\n            \"name\": \"coding\",\r\n            \"valueCoding\": {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"125605004 |fracture of bone| : 363698007 |finding site|  =  71341001 |bone structure of femur|\"\r\n            }\r\n        }\r\n    ]\r\n}";
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+  res = curl_easy_perform(curl);
+}
+curl_easy_cleanup(curl);

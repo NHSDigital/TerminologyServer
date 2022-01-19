@@ -1,0 +1,7 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$body = "{`n    `"resourceType`": `"Parameters`",`n    `"parameter`": [`n        {`n            `"name`": `"system`",`n            `"valueUri`": `"http://snomed.info/sct`"`n        },`n        {`n            `"name`": `"codeA`",`n            `"valueCode`": `"61557004`"`n        },`n        {`n            `"name`": `"codeB`",`n            `"valueCode`": `"397956004 |Prosthetic arthroplasty of the hip|: 363704007 |Procedure site| = ( 24136001 |Hip joint structure|: 272741003 |Laterality| =  7771000 |Left| )`"`n        }`n    ]`n}"
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$subsumes' -Method 'POST' -Headers $headers -Body $body
+$response | ConvertTo-Json

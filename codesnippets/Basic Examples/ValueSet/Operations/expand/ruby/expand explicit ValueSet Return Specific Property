@@ -1,0 +1,13 @@
+require "uri"
+require "net/http"
+
+url = URI("https://ontology.nhs.uk/production1/fhir/ValueSet/feeding-device/$expand?property=effectiveTime")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+request["Authorization"] = "Bearer <token>"
+
+response = https.request(request)
+puts response.read_body

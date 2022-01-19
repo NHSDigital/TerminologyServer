@@ -1,0 +1,11 @@
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/fhir+json");
+RequestBody body = RequestBody.create(mediaType, "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"url\",\r\n            \"valueUri\": \"http://snomed.info/sct\"\r\n        },\r\n        {\r\n            \"name\": \"coding\",\r\n            \"valueCoding\": {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"125605004 |fracture of bone| : 363698007 |finding site|  =  71341001 |bone structure of femur|\"\r\n            }\r\n        }\r\n    ]\r\n}");
+Request request = new Request.Builder()
+  .url("https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/fhir+json")
+  .addHeader("Authorization", "Bearer <token>")
+  .build();
+Response response = client.newCall(request).execute();

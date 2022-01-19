@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("{{fhir-prod}}")
+payload = ''
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("GET", "/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=refset", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

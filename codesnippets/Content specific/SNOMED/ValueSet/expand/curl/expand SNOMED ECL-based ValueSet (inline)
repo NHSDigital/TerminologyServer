@@ -1,0 +1,28 @@
+curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand' \
+--header 'Content-Type: application/fhir+json' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "valueSet",
+            "resource": {
+                "resourceType": "ValueSet",
+                "compose": {
+                    "include": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "filter": [
+                                {
+                                    "property": "constraint",
+                                    "op": "=",
+                                    "value": "<< 50043002 : << 263502005 = << 19939008"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}'

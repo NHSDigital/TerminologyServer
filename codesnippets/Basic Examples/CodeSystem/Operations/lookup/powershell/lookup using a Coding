@@ -1,0 +1,7 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$body = "{`n  `"resourceType`": `"Parameters`",`n  `"parameter`": [`n    {`n      `"name`": `"coding`",`n      `"valueCoding`": {`n        `"system`": `"http://snomed.info/sct`",`n        `"code`": `"56265001`"`n      }`n    },`n    {`n      `"name`": `"property`",`n      `"valueString`": `"inactive`"`n    }`n  ]`n}"
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup' -Method 'POST' -Headers $headers -Body $body
+$response | ConvertTo-Json

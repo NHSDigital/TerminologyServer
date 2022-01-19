@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$lookup?system=http://snomed.info/sct&code=56265001&_format=json&property=child' \
+--header 'Authorization: Bearer <token>'

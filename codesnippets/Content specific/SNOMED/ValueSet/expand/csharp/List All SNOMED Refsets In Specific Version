@@ -1,0 +1,6 @@
+var client = new RestClient("{{fhir-prod}}/ValueSet/$expand?url=http://snomed.info/sct/83821000000107/version/20210804?fhir_vs=refset");
+client.Timeout = -1;
+var request = new RestRequest(Method.GET);
+request.AddHeader("Authorization", "Bearer <token>");
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);

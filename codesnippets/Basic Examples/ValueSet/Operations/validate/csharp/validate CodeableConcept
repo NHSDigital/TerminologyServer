@@ -1,0 +1,28 @@
+var client = new RestClient("https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code");
+client.Timeout = -1;
+var request = new RestRequest(Method.POST);
+request.AddHeader("Authorization", "Bearer <token>");
+var body = @"{" + "\n" +
+@"    ""resourceType"": ""Parameters""," + "\n" +
+@"    ""parameter"": [" + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""url""," + "\n" +
+@"            ""valueUri"": ""http://hl7.org/fhir/ValueSet/feeding-device""" + "\n" +
+@"        }," + "\n" +
+@"        {" + "\n" +
+@"            ""name"": ""codeableConcept""," + "\n" +
+@"            ""valueCodeableConcept"": {" + "\n" +
+@"                ""coding"": [" + "\n" +
+@"                    {" + "\n" +
+@"                        ""code"": ""sippy-valve""," + "\n" +
+@"                        ""system"": ""http://hl7.org/fhir/feeding-device""," + "\n" +
+@"                        ""display"": ""Sippy cup with valve""" + "\n" +
+@"                    }" + "\n" +
+@"                ]" + "\n" +
+@"            }" + "\n" +
+@"        }" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddParameter("text/plain", body,  ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+Console.WriteLine(response.Content);

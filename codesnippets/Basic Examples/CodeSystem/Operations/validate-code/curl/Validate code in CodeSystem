@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/CodeSystem/$validate-code?url=http://hl7.org/fhir/feeding-device&code=handhold-cup&display=Double handhold on glass/cup' \
+--header 'Authorization: Bearer <token>'

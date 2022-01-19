@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"system\",\r\n            \"valueUri\": \"http://snomed.info/sct\"\r\n        },\r\n        {\r\n            \"name\": \"codeA\",\r\n            \"valueCode\": \"61557004\"\r\n        },\r\n        {\r\n            \"name\": \"codeB\",\r\n            \"valueCode\": \"397956004 |Prosthetic arthroplasty of the hip|: 363704007 |Procedure site| = ( 24136001 |Hip joint structure|: 272741003 |Laterality| =  7771000 |Left| )\"\r\n        }\r\n    ]\r\n}"
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("POST", "/production1/fhir/CodeSystem/$subsumes", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

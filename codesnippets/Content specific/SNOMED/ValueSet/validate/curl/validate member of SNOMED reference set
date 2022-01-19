@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code?system=http://snomed.info/sct&code=46836008&url=http://snomed.info/sct?fhir_vs=refset/723264001' \
+--header 'Authorization: Bearer <token>'

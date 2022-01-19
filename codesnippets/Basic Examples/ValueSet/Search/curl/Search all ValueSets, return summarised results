@@ -1,0 +1,2 @@
+curl --location --request GET 'https://ontology.nhs.uk/production1/fhir/ValueSet?name=mental' \
+--header 'Authorization: Bearer <token>'

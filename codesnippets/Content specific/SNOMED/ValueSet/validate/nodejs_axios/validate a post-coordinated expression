@@ -1,0 +1,35 @@
+var axios = require('axios');
+var data = JSON.stringify({
+  "resourceType": "Parameters",
+  "parameter": [
+    {
+      "name": "url",
+      "valueUri": "http://snomed.info/sct"
+    },
+    {
+      "name": "coding",
+      "valueCoding": {
+        "system": "http://snomed.info/sct",
+        "code": "125605004 |fracture of bone| : 363698007 |finding site|  =  71341001 |bone structure of femur|"
+      }
+    }
+  ]
+});
+
+var config = {
+  method: 'post',
+  url: 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code',
+  headers: { 
+    'Content-Type': 'application/fhir+json', 
+    'Authorization': 'Bearer <token>'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});

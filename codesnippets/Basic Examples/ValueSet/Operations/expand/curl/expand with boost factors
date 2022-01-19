@@ -1,0 +1,2 @@
+curl --location --request GET '' \
+--header 'Authorization: Bearer <token>'

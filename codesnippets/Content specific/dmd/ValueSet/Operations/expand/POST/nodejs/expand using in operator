@@ -1,0 +1,35 @@
+var https = require('follow-redirects').https;
+var fs = require('fs');
+
+var options = {
+  'method': 'POST',
+  'hostname': 'ontology.nhs.uk',
+  'path': '/production1/fhir/ValueSet/$expand',
+  'headers': {
+    'Authorization': 'Bearer <token>'
+  },
+  'maxRedirects': 20
+};
+
+var req = https.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function (chunk) {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+
+  res.on("error", function (error) {
+    console.error(error);
+  });
+});
+
+var postData =  "{\r\n    \"resourceType\": \"Parameters\",\r\n    \"parameter\": [\r\n        {\r\n            \"name\": \"valueSet\",\r\n            \"resource\": {\r\n                \"resourceType\": \"ValueSet\",\r\n                \"compose\": {\r\n                    \"include\": [\r\n                        {\r\n                            \"system\": \"https://dmd.nhs.uk\",\r\n                            \"filter\": [\r\n                                {\r\n                                    \"property\": \"parent\",\r\n                                    \"op\": \"=\",\r\n                                    \"value\": \"VMP\"\r\n                                },\r\n                                {\r\n                                    \"property\": \"parent\",\r\n                                    \"op\": \"in\",\r\n                                    \"value\": \"73572009,90332006,412556009\"\r\n                                },\r\n                                {\r\n                                    \"property\": \"ROUTECD\",\r\n                                    \"op\": \"=\",\r\n                                    \"value\": \"73572009,90332006,412556009\"\r\n                                }\r\n                            ]\r\n                        }\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"name\": \"count\",\r\n            \"valueInteger\": 100\r\n        }\r\n    ]\r\n}";
+
+req.write(postData);
+
+req.end();

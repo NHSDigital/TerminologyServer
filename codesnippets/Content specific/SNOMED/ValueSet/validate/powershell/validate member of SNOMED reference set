@@ -1,0 +1,5 @@
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Authorization", "Bearer <token>")
+
+$response = Invoke-RestMethod 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code?system=http://snomed.info/sct&code=46836008&url=http://snomed.info/sct?fhir_vs=refset/723264001' -Method 'GET' -Headers $headers
+$response | ConvertTo-Json

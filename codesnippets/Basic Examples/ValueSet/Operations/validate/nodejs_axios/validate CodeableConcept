@@ -1,0 +1,19 @@
+var axios = require('axios');
+var data = '{\r\n    "resourceType": "Parameters",\r\n    "parameter": [\r\n        {\r\n            "name": "url",\r\n            "valueUri": "http://hl7.org/fhir/ValueSet/feeding-device"\r\n        },\r\n        {\r\n            "name": "codeableConcept",\r\n            "valueCodeableConcept": {\r\n                "coding": [\r\n                    {\r\n                        "code": "sippy-valve",\r\n                        "system": "http://hl7.org/fhir/feeding-device",\r\n                        "display": "Sippy cup with valve"\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    ]\r\n}';
+
+var config = {
+  method: 'post',
+  url: 'https://ontology.nhs.uk/production1/fhir/ValueSet/$validate-code',
+  headers: { 
+    'Authorization': 'Bearer <token>'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
