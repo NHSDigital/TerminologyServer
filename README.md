@@ -9,7 +9,7 @@ The Postman Collection is configured to cache an access token in the `token` env
 
 * [Import the Postman collection](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman)
 * [Import the Postman environment](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman)
-* Set the two placeholder variables for your credentials (`client_id` and `client_secret`) ![Screenshot of setting variables](./images/set_variables.png)
-* Set your current environment to `ontology.nhs.uk example environment` ![Screenshot of setting environment](./images/set_environment.png)
-* Send the Authentication/Obtain Token request ![Screenshot of getting a token](.images/obtain_token.png)
+* Set the two placeholder variables for your credentials (`client_id` and `client_secret`) <p><img align="center" width="50%" height="50%" src="./images/set_variables.png">
+* Set your current environment to `ontology.nhs.uk example environment` <p><img align="center" width="50%" height="50%" src="./images/set_environment.png">
+* Send the Authentication/Obtain Token request <p><img align="center" width="50%" height="50%" src="./images/obtain_token.png">
 * Run example requests
