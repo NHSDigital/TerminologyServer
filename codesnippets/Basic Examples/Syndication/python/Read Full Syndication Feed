@@ -1,11 +1,11 @@
 import http.client
 
-conn = http.client.HTTPSConnection("")
+conn = http.client.HTTPSConnection("{{syndication-endpoint}}")
 payload = ''
 headers = {
   'Authorization': 'Bearer <token>'
 }
-conn.request("GET", "/", payload, headers)
+conn.request("GET", "/syndication.xml", payload, headers)
 res = conn.getresponse()
 data = res.read()
 print(data.decode("utf-8"))

@@ -1,4 +1,4 @@
-var client = new RestClient("");
+var client = new RestClient("https://ontology.nhs.uk/syndication/feed/20220201_001_EXT_RC/entry/f3bed611-9c17-4ee2-9a1b-815d5af73272/artefact/conceptmaps_json");
 client.Timeout = -1;
 var request = new RestRequest(Method.GET);
 request.AddHeader("Authorization", "Bearer <token>");

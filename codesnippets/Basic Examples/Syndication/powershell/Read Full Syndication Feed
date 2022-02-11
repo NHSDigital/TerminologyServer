@@ -1,5 +1,5 @@
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Authorization", "Bearer <token>")
 
-$response = Invoke-RestMethod '' -Method 'GET' -Headers $headers
+$response = Invoke-RestMethod '{{syndication-endpoint}}/syndication.xml' -Method 'GET' -Headers $headers
 $response | ConvertTo-Json

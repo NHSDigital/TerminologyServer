@@ -1,0 +1,2 @@
+curl --location -g --request GET '{{syndication-endpoint}}/syndication.xml' \
+--header 'Authorization: Bearer <token>'

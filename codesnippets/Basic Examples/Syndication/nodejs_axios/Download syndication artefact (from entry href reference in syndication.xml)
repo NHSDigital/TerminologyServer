@@ -1,0 +1,17 @@
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://ontology.nhs.uk/syndication/feed/20220201_001_EXT_RC/entry/f3bed611-9c17-4ee2-9a1b-815d5af73272/artefact/conceptmaps_json',
+  headers: { 
+    'Authorization': 'Bearer <token>'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});

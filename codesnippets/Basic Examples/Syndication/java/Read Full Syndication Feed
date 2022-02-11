@@ -1,7 +1,7 @@
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
-  .url("")
+  .url("{{syndication-endpoint}}/syndication.xml")
   .method("GET", null)
   .addHeader("Authorization", "Bearer <token>")
   .build();

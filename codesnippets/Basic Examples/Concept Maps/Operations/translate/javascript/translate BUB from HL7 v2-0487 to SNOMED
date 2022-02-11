@@ -1,0 +1,13 @@
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer <token>");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://ontology.nhs.uk/production1/fhir/ConceptMap/102/$translate?code=BUB&system=http://terminology.hl7.org/CodeSystem/v2-0487&target=http://snomed.info/sct", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

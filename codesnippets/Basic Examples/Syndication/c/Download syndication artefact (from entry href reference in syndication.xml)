@@ -3,7 +3,7 @@ CURLcode res;
 curl = curl_easy_init();
 if(curl) {
   curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
-  curl_easy_setopt(curl, CURLOPT_URL, "");
+  curl_easy_setopt(curl, CURLOPT_URL, "https://ontology.nhs.uk/syndication/feed/20220201_001_EXT_RC/entry/f3bed611-9c17-4ee2-9a1b-815d5af73272/artefact/conceptmaps_json");
   curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
   curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
   struct curl_slist *headers = NULL;

@@ -2,7 +2,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: '',
+  url: '{{syndication-endpoint}}/syndication.xml',
   headers: { 
     'Authorization': 'Bearer <token>'
   }
