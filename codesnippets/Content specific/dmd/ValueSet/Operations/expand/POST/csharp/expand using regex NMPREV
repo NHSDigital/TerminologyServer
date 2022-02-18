@@ -17,7 +17,7 @@ var body = @"{" + "\n" +
 @"                                {" + "\n" +
 @"                                    ""property"": ""NMPREV""," + "\n" +
 @"                                    ""op"": ""regex""," + "\n" +
-@"                                    ""value"": ""./[pP]aracetamol./""" + "\n" +
+@"                                    ""value"": "".*[pP]aracetamol.*""" + "\n" +
 @"                                }" + "\n" +
 @"                            ]" + "\n" +
 @"                        }" + "\n" +
