@@ -11,7 +11,7 @@ The Postman examples are provided in two separate collections and you should pic
 * [Import the Postman environment](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman)
 * You do not need to update any environment variables (the defaults are fine)
 * Set your current environment to `ontology.nhs.uk example environment` <p><img align="center" width="50%" height="50%" src="./images/set_environment.png">
-* Select the parent folder of the postman collection: `ontology.nhs.uk examples - User Account`  <p><img align="center" width="50%" height="50%" src="./images/user_account_token.png"> 
+* Select the parent folder of the postman collection: `ontology.nhs.uk examples - User Account`  <p><img align="center" width="75%" height="75%" src="./images/user_account_token.png"> 
 * Click the Orange Button labelled `Get New Access Token`
 * A window will pop up asking for your login credentials - complete them and login
 * Click Orange `Use Token` button
