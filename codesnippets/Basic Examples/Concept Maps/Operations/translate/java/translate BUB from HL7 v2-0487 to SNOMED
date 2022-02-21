@@ -1,0 +1,8 @@
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+Request request = new Request.Builder()
+  .url("https://ontology.nhs.uk/production1/fhir/ConceptMap/102/$translate?code=BUB&system=http://terminology.hl7.org/CodeSystem/v2-0487&target=http://snomed.info/sct")
+  .method("GET", null)
+  .addHeader("Authorization", "Bearer <token>")
+  .build();
+Response response = client.newCall(request).execute();

@@ -1,8 +1,0 @@
-var client = new RestClient("https://ontology.nhs.uk/authorisation/auth/realms/nhs-digital-terminology/protocol/openid-connect/token");
-client.Timeout = -1;
-var request = new RestRequest(Method.POST);
-request.AddParameter("grant_type", "client_credentials");
-request.AddParameter("client_id", "{{client_id}}");
-request.AddParameter("client_secret", "{{client_secret}}");
-IRestResponse response = client.Execute(request);
-Console.WriteLine(response.Content);

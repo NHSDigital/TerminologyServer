@@ -1,0 +1,4 @@
+curl --location --request POST 'https://ontology.nhs.uk/authorisation/auth/realms/nhs-digital-terminology/protocol/openid-connect/token' \
+--data-urlencode 'grant_type=client_credentials' \
+--data-urlencode 'client_id={{client_id}}' \
+--data-urlencode 'client_secret={{client_secret}}'

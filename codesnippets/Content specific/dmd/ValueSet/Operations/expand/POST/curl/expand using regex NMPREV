@@ -15,7 +15,7 @@ curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/ValueSe
                                 {
                                     "property": "NMPREV",
                                     "op": "regex",
-                                    "value": "./[pP]aracetamol./"
+                                    "value": ".*[pP]aracetamol.*"
                                 }
                             ]
                         }

@@ -1,0 +1,35 @@
+var https = require('follow-redirects').https;
+var fs = require('fs');
+
+var options = {
+  'method': 'POST',
+  'hostname': 'ontology.nhs.uk',
+  'path': '/production1/fhir/ValueSet/$expand',
+  'headers': {
+    'Authorization': 'Bearer <token>'
+  },
+  'maxRedirects': 20
+};
+
+var req = https.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function (chunk) {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+
+  res.on("error", function (error) {
+    console.error(error);
+  });
+});
+
+var postData =  "{\n    \"resourceType\": \"Parameters\",\n    \"parameter\": [\n        {\n            \"name\": \"valueSet\",\n            \"resource\": {\n                \"resourceType\": \"ValueSet\",\n                \"compose\": {\n                    \"include\": [\n                        {\n                            \"system\": \"http://read.info/ctv3\",\n                            \"filter\": [\n                                {\n                                    \"property\": \"concept\",\n                                    \"op\": \"descendent-of\",\n                                    \"value\": \"H3...\"\n                                }\n                            ]\n                        }\n                    ]\n                }\n            }\n        },\n        {\n            \"name\": \"count\",\n            \"valueInteger\": 100\n        }\n    ]\n}";
+
+req.write(postData);
+
+req.end();

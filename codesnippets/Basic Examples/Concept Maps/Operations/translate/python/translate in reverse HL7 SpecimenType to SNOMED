@@ -1,0 +1,11 @@
+import http.client
+
+conn = http.client.HTTPSConnection("ontology.nhs.uk")
+payload = ''
+headers = {
+  'Authorization': 'Bearer <token>'
+}
+conn.request("GET", "/production1/fhir/ConceptMap/102/$translate?code=309068002&system=http://snomed.info/sct&reverse=true&target=http://hl7.org/fhir/v2/0487", payload, headers)
+res = conn.getresponse()
+data = res.read()
+print(data.decode("utf-8"))

@@ -27,7 +27,7 @@ func main() {
                                 {`+""+`
                                     "property": "NMPREV",`+""+`
                                     "op": "regex",`+""+`
-                                    "value": "./[pP]aracetamol./"`+""+`
+                                    "value": ".*[pP]aracetamol.*"`+""+`
                                 }`+""+`
                             ]`+""+`
                         }`+""+`

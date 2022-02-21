@@ -1,0 +1,31 @@
+curl --location --request POST 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand' \
+--header 'Authorization: Bearer <token>' \
+--data-raw '{
+    "resourceType": "Parameters",
+    "parameter": [
+        {
+            "name": "valueSet",
+            "resource": {
+                "resourceType": "ValueSet",
+                "compose": {
+                    "include": [
+                        {
+                            "system": "http://read.info/ctv3",
+                            "filter": [
+                                {
+                                    "property": "concept",
+                                    "op": "descendent-of",
+                                    "value": "H3..."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "count",
+            "valueInteger": 100
+        }
+    ]
+}'

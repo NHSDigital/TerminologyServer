@@ -1,0 +1,13 @@
+require "uri"
+require "net/http"
+
+url = URI("https://ontology.nhs.uk/syndication/feed/20220201_001_EXT_RC/entry/f3bed611-9c17-4ee2-9a1b-815d5af73272/artefact/conceptmaps_json")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+request["Authorization"] = "Bearer <token>"
+
+response = https.request(request)
+puts response.read_body

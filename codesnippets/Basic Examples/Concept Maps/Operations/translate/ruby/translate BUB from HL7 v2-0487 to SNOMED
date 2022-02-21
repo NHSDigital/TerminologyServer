@@ -1,0 +1,13 @@
+require "uri"
+require "net/http"
+
+url = URI("https://ontology.nhs.uk/production1/fhir/ConceptMap/102/$translate?code=BUB&system=http://terminology.hl7.org/CodeSystem/v2-0487&target=http://snomed.info/sct")
+
+https = Net::HTTP.new(url.host, url.port)
+https.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+request["Authorization"] = "Bearer <token>"
+
+response = https.request(request)
+puts response.read_body

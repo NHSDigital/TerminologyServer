@@ -1,0 +1,19 @@
+var axios = require('axios');
+var data = '{\n    "resourceType": "Parameters",\n    "parameter": [\n        {\n            "name": "valueSet",\n            "resource": {\n                "resourceType": "ValueSet",\n                "compose": {\n                    "include": [\n                        {\n                            "system": "http://read.info/ctv3",\n                            "filter": [\n                                {\n                                    "property": "concept",\n                                    "op": "descendent-of",\n                                    "value": "H3..."\n                                }\n                            ]\n                        }\n                    ]\n                }\n            }\n        },\n        {\n            "name": "count",\n            "valueInteger": 100\n        }\n    ]\n}';
+
+var config = {
+  method: 'post',
+  url: 'https://ontology.nhs.uk/production1/fhir/ValueSet/$expand',
+  headers: { 
+    'Authorization': 'Bearer <token>'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});

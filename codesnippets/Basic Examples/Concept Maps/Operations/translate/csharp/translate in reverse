@@ -1,6 +1,0 @@
-var client = new RestClient("https://ontology.nhs.uk/production1/fhir/ConceptMap/102/$translate?code=309068002&system=http://snomed.info/sct&reverse=true&target=http://hl7.org/fhir/v2/0487");
-client.Timeout = -1;
-var request = new RestRequest(Method.GET);
-request.AddHeader("Authorization", "Bearer <token>");
-IRestResponse response = client.Execute(request);
-Console.WriteLine(response.Content);

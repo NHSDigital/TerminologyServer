@@ -26,7 +26,7 @@ curl_setopt_array($curl, array(
                                 {
                                     "property": "NMPREV",
                                     "op": "regex",
-                                    "value": "./[pP]aracetamol./"
+                                    "value": ".*[pP]aracetamol.*"
                                 }
                             ]
                         }

@@ -1,0 +1,2 @@
+ Please note: this folder contains two postman collections that are identical except for the authentication method they use. 
+ Postman doesn't make it very easy to provide collections with switchable authentication methods and given that the primary aim of these Postman examples is to make them as accessible and easy to use as possible (rather than to prioritise maintainability) a conscious choice has been to accept the maintenance overhead of the duplication.
