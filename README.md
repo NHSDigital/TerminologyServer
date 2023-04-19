@@ -1,6 +1,6 @@
-# NHS Digital Terminology Server Examples
+# NHS England Terminology Server Examples
 
-This repository aims to provide a library of useful examples/code snippets to help users of the NHS Digital Terminology Server become more familiar with the basic functions and operations of the server. It should be used in conjunction with the documentation provided in the [terminology module of the FHIR standard](https://www.hl7.org/fhir/terminology-module.html), the [NHS Digital Terminology Server Information](https://digital.nhs.uk/services/terminology-servers).
+This repository aims to provide a library of useful examples/code snippets to help users of the NHS England Terminology Server become more familiar with the basic functions and operations of the server. It should be used in conjunction with the documentation provided in the [terminology module of the FHIR standard](https://www.hl7.org/fhir/terminology-module.html), the [NHS England Terminology Server Information](https://digital.nhs.uk/services/terminology-servers).
 
 [Postman](https://www.postman.com/downloads/) is a freely available api tool that can be useful for exploring the FHIR apis that the Terminology Server exposes but all the examples are also provided as codesnippets in various languages (including curl).
 
